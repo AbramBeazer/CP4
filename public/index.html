@@ -1,0 +1,114 @@
+<html>
+  <head>
+    <title>Make your own D&D party!</title>
+    <meta content="">
+    <style></style>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="app">
+      <center>
+        <img src="banner.jpeg">
+      <h1 >Get the party together! </h1>
+      <p>Add a character to your merry band of adventurers!</p>
+      <form v-on:submit.prevent="addCharacter">
+
+       	Name:<input type="text" id="name" v-model="newName">
+        Class:<select v-model="newClass">
+                <option value="Barbarian">Barbarian</option>
+                <option value="Bard">Bard</option>
+                <option value="Cleric">Cleric</option>
+                <option value="Druid">Druid</option>
+                <option value="Fighter">Fighter</option>
+                <option value="Monk">Monk</option>
+                <option value="Paladin">Paladin</option>
+                <option value="Ranger">Ranger</option>
+                <option value="Rogue">Rogue</option>
+                <option value="Sorcerer">Sorcerer</option>
+                <option value="Warlock">Warlock</option>
+                <option value="Wizard">Wizard</option>
+              </select>
+        STR: <input type="number" step="1" min="1" max="20" v-model="newStr">
+        DEX: <input type="number" step="1" min="1" max="20" v-model="newDex">
+        CON: <input type="number" step="1" min="1" max="20" v-model="newCon">
+        INT: <input type="number" step="1" min="1" max="20" v-model="newInt">
+        WIS: <input type="number" step="1" min="1" max="20" v-model="newWis">
+        CHA: <input type="number" step="1" min="1" max="20" v-model="newCha">
+
+       	<button type="submit">Add</button>
+        &nbsp {{error}}
+      </form>
+      <br>
+      <button v-on:click="getRandomStats()">Random Stats</button>
+    </center>
+
+
+      <h2 class="centered-h2">Current party size: {{size}}
+        <button v-on:click="clearParty()">Clear</button></h2>
+
+      <div class="table">
+        <ul>
+          <li v-for="character in party">
+            {{character.name}} ({{character.class}})
+            <ul>
+              <li>STR: {{character.str}}</li>
+              <li>DEX: {{character.dex}}</li>
+              <li>CON: {{character.con}}</li>
+              <li>INT: {{character.int}}</li>
+              <li>WIS: {{character.wis}}</li>
+              <li>CHA: {{character.cha}}</li>
+            </ul>
+            <button v-on:click="removeCharacter(character)">Remove</button>
+            <br>
+            <br>
+          </li>
+
+
+
+
+
+        </ul>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <br>  <br>
+                    <br>  <br>
+                      <br>  <br>
+                        <br> <br>
+                          <br>  <br>
+                            <br>  <br>
+                              <br>  <br>
+                                <br>  <br>
+                                  <br>  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                    <a href="https://github.com/AbramBeazer/CP4.git">Github</a>
+    </div>
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js" integrity="sha256-mpnrJ5DpEZZkwkE1ZgkEQQJW/46CSEh/STrZKOB/qoM=" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+   <script src="script.js"></script>
+  </body>
+</html>

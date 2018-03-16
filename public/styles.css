@@ -1,0 +1,18 @@
+
+.table{
+  display: table;
+  margin: 0 auto;
+}
+
+.centered-h2{
+  text-align: center;
+}
+
+body {
+  background-color: palegoldenrod;
+}
+
+form {
+  margin: 0 auto;
+  width: 80%;
+}
