@@ -18,6 +18,14 @@ var app = new Vue({
 //
   },
   methods: {
+    getRandomStats: function() {
+      this.newStr = 1 + Math.floor(Math.random() * 20);
+      this.newDex = 1 + Math.floor(Math.random() * 20);
+      this.newCon = 1 + Math.floor(Math.random() * 20);
+      this.newInt = 1 + Math.floor(Math.random() * 20);
+      this.newWis = 1 + Math.floor(Math.random() * 20);
+      this.newCha = 1 + Math.floor(Math.random() * 20);
+    },
     addCharacter: function() {
       axios.post("/api/items", {
       	name: this.newName,
