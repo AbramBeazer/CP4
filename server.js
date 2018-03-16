@@ -17,7 +17,9 @@ app.get('/api/items', (req, res) => {
 
 app.post('/api/items', (req, res) => {
   id = id + 1;
-  let item = {id:id, text:req.body.text, priority: req.body.priority, completed: req.body.completed};
+  let item = {id:id, name:req.body.name, class: req.body.class,
+     str: req.body.str, dex: req.body.dex, con: req.body.con,
+     int: req.body.int, wis: req.body.wis, cha: req.body.cha};
   party.push(item);
   res.send(item);
 });
