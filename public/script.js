@@ -3,6 +3,7 @@
 var app = new Vue({
   el: '#app',
   data: {
+    partyName: "party",
     party: [],
     size: 0,
     newName: "",
@@ -14,6 +15,15 @@ var app = new Vue({
     newWis: "",
     newCha: "",
     error: "",
+  },
+  computed:{
+    getPartyName: function() {
+    if(this.partyName === '')
+      {return "party";}
+      else{
+        return this.partyName;
+      }
+    }
   },
   created: function() {
     this.getParty();
@@ -27,13 +37,19 @@ var app = new Vue({
       this.newWis = 1 + Math.floor(Math.random() * 20);
       this.newCha = 1 + Math.floor(Math.random() * 20);
     },
+    sendName: function() {
+      axios.put("/api/name", {
+        partyName: this.partyName
+      }).then(response => {
+
+      }).catch(err => {});
+    },
     addCharacter: function() {
-      this.error = "";
       if(this.newName !== "" && this.newClass !== "" && this.newStr !== ""
         && this.newDex !== "" && this.newCon !== "" && this.newInt !== ""
         && this.newWis !== "" && this.newCha !== "")
       {
-        axios.post("http://localhost:3000/api/items", {
+        axios.post("/api/items", {
       	name: this.newName,
         class: this.newClass,
         str: this.newStr,
@@ -56,11 +72,11 @@ var app = new Vue({
                               	return true;}).catch(err => {});
       }
       else{
-        this.error = "Please fill all fields.";
+        this.error = "Please fill all fields."
       }
     },
     removeCharacter: function(character) {
-      axios.delete("http://localhost:3000/api/items/" + character.id).then(response => {
+      axios.delete("/api/items/" + character.id).then(response => {
         this.size = this.size - 1;
         this.getParty();
        	return true;
@@ -71,8 +87,14 @@ var app = new Vue({
         this.removeCharacter(character);
       });
     },
+    getName: function() {
+      axios.get("/api/name").then(response => {
+        this.partyName = response.data;
+      }).catch(err => {});
+    },
     getParty: function() {
-      axios.get("http://localhost:3000/api/items").then(response => {
+      this.getName();
+      axios.get("/api/items").then(response => {
       this.party = response.data;
       this.size = this.party.length;
       return true;

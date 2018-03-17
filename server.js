@@ -10,6 +10,7 @@ app.use(express.static('public'))
 
 let party = [];
 let id = 0;
+let partyName = "";
 
 app.get('/api/items', (req, res) => {
   res.send(party);
@@ -17,6 +18,7 @@ app.get('/api/items', (req, res) => {
 
 app.post('/api/items', (req, res) => {
   id = id + 1;
+  partyName = req.body.partyName;
   let item = {id:id, name:req.body.name, class: req.body.class,
      str: req.body.str, dex: req.body.dex, con: req.body.con,
      int: req.body.int, wis: req.body.wis, cha: req.body.cha};
@@ -24,21 +26,13 @@ app.post('/api/items', (req, res) => {
   res.send(item);
 });
 
-app.put('/api/items/:id', (req, res) => {
-  let id = parseInt(req.params.id);
-  let itemsMap = party.map(item => { return item.id; });
-  let index = itemsMap.indexOf(id);
-  let item = items[index];
-  item.completed = req.body.completed;
-  item.priority = req.body.priority;
-  item.text = req.body.text;
-  // handle drag and drop re-ordering
-  if (req.body.orderChange) {
-    let indexTarget = itemsMap.indexOf(req.body.orderTarget);
-    party.splice(index,1);
-    party.splice(indexTarget,0,item);
-  }
-  res.send(item);
+app.put('/api/name', (req, res) => {
+  partyName = req.body.partyName;
+  res.send(partyName);
+});
+
+app.get('/api/name', (req, res) =>{
+  res.send(partyName);
 });
 
 app.delete('/api/items/:id', (req, res) => {

@@ -10,6 +10,10 @@
       <center>
         <img src="banner.jpeg">
       <h1 >Get the party together! </h1>
+
+      We shall be known as: <input type="text" v-model="partyName">
+        <button v-on:click="sendName()">Save</button>
+
       <p>Add a character to your merry band of adventurers!</p>
       <form v-on:submit.prevent="addCharacter">
 
@@ -43,7 +47,7 @@
     </center>
 
 
-      <h2 class="centered-h2">Current party size: {{size}}
+      <h2 class="centered-h2">Members of {{getPartyName}}: {{size}}
         <button v-on:click="clearParty()">Clear</button></h2>
 
       <div class="table">
